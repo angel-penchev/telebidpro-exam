@@ -2,14 +2,17 @@ import re
 
 
 def main():
-    K, L, R = parse_user_input()
-    AX, AY = parse_user_input()
-    BX, BY = parse_user_input()
+    K, L, R = parse_user_input(3)
+    AX, AY = parse_user_input(2)
+    try:
+        BX, BY = parse_user_input(2)
+    except:
+        pass
 
     field = [[1 for j in range(L)] for i in range(K)]
     field[AX][AY] = 0
     field[BX][BY] = 0
-    print_field(field)
+    # print_field(field)
 
     directions = [(-1, 0), (0, -1), (1, 0), (0, 1)]
     for _ in range(R):
@@ -23,12 +26,17 @@ def main():
                         except IndexError:
                             pass
         field = new_field
-        print_field(field)
+        # print_field(field)
 
-def parse_user_input():
+    print(sum([row.count(1) for row in field]))
+
+
+def parse_user_input(required_outputs):
     data = input()
     data = data.strip(' \t\n\r')
     data = re.split(r',\s', data)
+    if len(data) != required_outputs:
+        raise IOError
     return [int(i) for i in data]
 
 
