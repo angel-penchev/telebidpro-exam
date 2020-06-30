@@ -1,18 +1,19 @@
 import psycopg2
 
+connection = psycopg2.connect(user="fadzlkknyafmvn",
+                              password="034fac3d7851c96bdaecbf721be3565ec9fcdc77f7e09a9ae6889e85c3c38546",
+                              host="ec2-54-217-213-79.eu-west-1.compute.amazonaws.com",
+                              port="5432",
+                              database="dae21bhcp9fiao")
+
 
 class DivisionDB:
     def __enter__(self):
-        self.conn = psycopg2.connect(user="tsb",
-                                     password="verysecurenohack",
-                                     host="127.0.0.1",
-                                     port="5432",
-                                     database="division")
+        self.conn = connection
         return self.conn.cursor()
 
     def __exit__(self, type, value, traceback):
-        self.conn.commit()
-        connection.putconn(self.conn)
+        return self.conn.commit()
 
 
 def calculate_new_request(A: float, B: float, name: str):
@@ -34,4 +35,4 @@ def calculate_new_request(A: float, B: float, name: str):
         ''')
 
         fetched_id = database.fetchone()
-        return A/B + fetched_id
+        return A/B + fetched_id[0]
