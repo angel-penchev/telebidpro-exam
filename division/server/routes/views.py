@@ -10,6 +10,7 @@ routes_blueprint = Blueprint("routes", __name__)
 @routes_blueprint.route("/", methods=["GET", "POST"])
 def index_route():
     result = 0
+    current_id = 0
     if request.method == 'POST':
         A = request.form["A"]
         B = request.form["B"]
@@ -24,6 +25,6 @@ def index_route():
         if B == 0:
             return render_template('index.html', error="Cannot devide by 0!")
 
-        result = calculate_new_request(A, B, name)
+        result, current_id = calculate_new_request(A, B, name)
 
-    return render_template("index.html", result=result)
+    return render_template("index.html", result=result, current_id=current_id)

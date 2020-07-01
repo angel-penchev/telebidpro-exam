@@ -12,11 +12,11 @@
     <p>A: </p><input type="number" name="A"><br>
     <p>B: </p><input type="number" name="B"><br>
     <p>Name: </p><input type="text" name="name"><br>
-    <input type="submit" value="submit">
+    <input type="submit" value="submit" onClick="this.form.submit(); this.disabled=true; this.value='Sending…';">
   </form>
 
-  {% if result != 0 %}
-  <p>{{ result }}</p>
+  {% if result and current_id %}
+  <p>{{ result }}, {{ current_id }}</p>
   {%endif%}
 
   {% if error %}

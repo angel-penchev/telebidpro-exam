@@ -35,4 +35,4 @@ def calculate_new_request(A: float, B: float, name: str):
         ''')
 
         fetched_id = database.fetchone()
-        return A/B + fetched_id[0]
+        return A/B, fetched_id[0]
